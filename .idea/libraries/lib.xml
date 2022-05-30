@@ -1,0 +1,20 @@
+<component name="libraryTable">
+  <library name="lib">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/东软社区/lib/miglayout-swing-sources.jar!/" />
+      <root url="jar://$PROJECT_DIR$/东软社区/lib/jgoodies-common-javadoc.jar!/" />
+      <root url="jar://$PROJECT_DIR$/东软社区/lib/miglayout-core.jar!/" />
+      <root url="jar://$PROJECT_DIR$/东软社区/lib/jgoodies-forms-sources.jar!/" />
+      <root url="jar://$PROJECT_DIR$/东软社区/lib/miglayout-core-javadoc.jar!/" />
+      <root url="jar://$PROJECT_DIR$/东软社区/lib/jgoodies-common.jar!/" />
+      <root url="jar://$PROJECT_DIR$/东软社区/lib/miglayout-swing-javadoc.jar!/" />
+      <root url="jar://$PROJECT_DIR$/东软社区/lib/miglayout-swing.jar!/" />
+      <root url="jar://$PROJECT_DIR$/东软社区/lib/jgoodies-forms.jar!/" />
+      <root url="jar://$PROJECT_DIR$/东软社区/lib/jgoodies-common-sources.jar!/" />
+      <root url="jar://$PROJECT_DIR$/东软社区/lib/miglayout-core-sources.jar!/" />
+      <root url="jar://$PROJECT_DIR$/东软社区/lib/jgoodies-forms-javadoc.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

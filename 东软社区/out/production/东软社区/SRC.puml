@@ -1,0 +1,276 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+
+
+
+class AdminDao{
+-String password
+-String id
++void AdminDao(String,String)
+}
+class SupportAdminDao{
+-String name
+-boolean ismale
+-String birthday
+-String phonenumber
++SupportAdminDao(String,String,String,boolean,String,String)
+}
+class LifeAdminDao{
+-String name
+-boolean ismale
+-String birthday
+-String phonenumber
+-ArrayList<ElderDao> elders
++LifeAdminDao(String,String,String,boolean,String,String)
+}
+class SuperAdminDao{
++SuperAdminDao()
+}
+class ElderDao{
+-LifeAdminDao lifeAdmin
+-String name
+-boolean ismale
+-String birthday
+-String phonenumber
++ElderDao(String,String,boolean,String)
+}
+class ElderListDao{
+-ArrayList<ElderDao> allElders
+-{static}ElderListDao instance
+-ElderListDao()
++void addElder(ElderDao)
++{static}ElderListDao getSingletonInstance()
+}
+class AdminListDao{
+-ArrayList<LifeAdminDao> lifeAdmins
+-ArrayList<SupportAdminDao> supportAdmins
+-{static}AdminListDao instance
+-AdminListDao()
++{static}AdminDao getSingletonInstance()
++void addAdmin(AdminDao)
+-void addSupportAdmin(SupportAdminDao)
+-void addLifeAdmin(LifeAdminDao)
++void deleteAdmin(AdminDao)
+  }
+ class BusDao{
+ -String id
+ -String lineCode
+ -String lineName
+ -boolean isUpward
+ -int operatingDate
+ -int serviceTime
+ -String startTime
+ -String endTime
+ -int revertionNumber
+ -ArrayList<ElderDao> passengers
+ +BusDao(String,String,String,boolean,int,int,String,String
+ }
+ class BusListDao{
+ -ArrayList<BusDao> buses
+ -{static}BusListDao instance
+ -BusListDao()
+ +BusListDao getSingletonInstance()
+ +void addBus(BusDao)
+ +void deleteBus(BusDao))
+
+ }
+ class LoginService{
+ -{static}LoginService instance
+  -LoginService()
+  +AdminListDao Login(String,String)
+  -SupportAdminDao canLoginSupportAdmin(String,String)
+  -LifeAdminDao canLoginLifeAdmin(String,String)
+ }
+ class SuperAdminService{
+ -{static}SuperAdminService instance
+ -AdminListDao adminListDao
+ -SuperAdminService()
+ +SuperAdminService getSingletonInstance()
+ +Object[][] getData()
+ +boolean addAdmin(AdminDao)
+ +boolean deleteAdmin(String))
+ +int modifyAdmin(AdminDao,AdminDao)
+ +AdminDao checkById(String)
+ +boolean setService(LifeAdminDao,ElderDao)
+ +boolean finishService(LifeAdminDao,ElderDao)
+ +ArrayList<ElderDao> showElder(LifeAdminDao)
+
+ }
+ class LifeAdminService{
+ -{static}LifeAdminService instance
+ -LifeAdminService()
+ +LifeAdminService getSingletonInstance()
+ +boolean modifyLifeAdmin(LifeAdminDao,LifeAdminDao)
+ +Object[][] getData(LifeAdminDao)
+ +void modifyElder(ElderDao,String,boolean,String,String)
+ }
+ class SupportAdminService{
+ -{static}SupportAdminService instance
+ -SupportAdminService()
+ +SupportAdminService getSingletonInstance()
+ -BusListDao busListDao
+ +Object[][] getBusData()
+ +boolean addBus(BusDao)
+ +boolean deleteBus(String)
+ +boolean serServiceTime(String,String)
+ +BusDao checkById(String)
+ +void orderBus(String,String)
+ +ArrayList<ElderDao> showPassengers(BusDao)
+ +void confirmBus(String,String)
+ }
+ class LoginController{
+  -PreLoginView preloginView
+  -LoginService loginService
+  +LoginController(PreLoginView)
+  +void keyPressed(KeyEvent)
+  +void actionPerformed(ActionEvent)
+  +void login()
+ }
+class SuperAdminController{
+-SuperAdminView superAdminView
+-AddView1 addView1
+-AddView2 addView2
+-ModifyView1 modifyView1
+-SetServiceView setServiceView
+-ShowServiceView showServiceView
+-SucceedView succeedView
+-ErrormassageofDeleteView errormassageofDeleteView
+-int tableFlag
+-SuperAdminService superAdminService
++SuperAdminController(SuperAdminView)
++SuperAdminController(AddView1)
++SuperAdminController(AddView2)
++SuperAdminController(ModifyView1)
++SuperAdminController(SetServiceView)
++void mousePressed(MouseEvent)
++void actionPerformed(ActionEvent)
+}
+class LifeAdminController{
+-LifeAdminView lifeAdminView
+-SucceedView succeedView
+-ModifyView2 modifyView2
+-int tableFlag
+-LifeAdminService lifeAdminService
++LifeAdminController(LifeAdminView)
++LifeAdminController(ModifyView2)
+}
+class SupportAdminController{
+-SetEndTimeView setEndTimeView
+-OrderView orderView
+-AddBusView addBusView
+-ShowPassangerView showPassangerView
+-SucceedView succeedView
+-int tableFlag
+-SupportAdminService supportAdminService
++SupportAdminController(setEndTimeView)
++SupportAdminController(OrderView)
++SupportAdminController(AddBusView)
+
+}
+
+
+
+
+class PreLoginView{}
+class SuperAdminView{}
+class AddView1{}
+class AddView2{}
+class ShowServiceView{}
+class ModifyView1{}
+class ModifyView2{}
+class SetServiceView{}
+class SetEndTimeView{}
+class ErrormassageofDeleteView{}
+class SucceedView{}
+class OrderView
+class LifeAdminView{}
+class SupportAdminView{}
+class AddBusView{}
+
+LifeAdminDao--|>AdminDao
+AdminDao<|--SupportAdminDao
+AdminDao<|--SuperAdminDao
+LifeAdminDao"1..1"-"0..*"ElderDao
+AdminListDao-->"1..1"SuperAdminDao
+AdminListDao-->"0..*"SupportAdminDao
+AdminListDao-->"0..*"LifeAdminDao
+BusListDao->"0..*"BusDao
+BusDao->"0..*"ElderDao
+ElderListDao->"0..*"ElderDao
+LoginService..>AdminListDao
+SuperAdminService..>AdminListDao
+SuperAdminService..>ElderDao
+SuperAdminService..>LifeAdminDao
+SuperAdminService..>SupportAdminDao
+LifeAdminService..>LifeAdminDao
+LifeAdminService..>SuperAdminService
+LifeAdminService..>ElderDao
+LifeAdminService..>ElderListDao
+SupportAdminService..>BusDao
+SupportAdminService...>BusListDao
+SupportAdminService..>ElderDao
+LoginController...>LoginService
+SuperAdminController..>SuperAdminService
+LifeAdminController..>LifeAdminService
+SupportAdminController..>SuperAdminService
+LoginController-- PreLoginView
+SuperAdminController-- AddView1
+SuperAdminController-- AddView2
+SuperAdminController-- ModifyView1
+SuperAdminController-- SetServiceView
+SuperAdminController-> ShowServiceView
+SupportAdminController-> ErrormassageofDeleteView
+SuperAdminController->SucceedView
+SupportAdminController-- SuperAdminView
+
+LifeAdminController-- LifeAdminView
+LifeAdminController-> SucceedView
+LifeAdminController-- ModifyView2
+SupportAdminController-- SetEndTimeView
+SupportAdminController-- OrderView
+SupportAdminController --AddBusView
+SupportAdminController->ShowPassangerView
+SupportAdminController-- SupportAdminView
+together {
+class AdminListDao
+class LifeAdminDao
+class AdminDao
+class BusDao
+class ElderDao
+class BusListDao
+class ElderListDao
+class SupportAdminDao
+class SuperAdminDao
+}
+together {
+class SuperAdminService
+class LifeAdminService
+class LoginService
+class SupportAdminService
+}
+together {
+ class LoginController
+ class SupportAdminController
+ class SuperAdminController
+ class LifeAdminController
+}
+together {
+class PreLoginView
+class SuperAdminView
+class AddView1
+class AddView2
+class ShowServiceView
+class ModifyView1
+class ModifyView2
+class SetServiceView
+class SetEndTimeView
+class ErrormassageofDeleteView
+class SucceedView
+class OrderView
+class LifeAdminView
+class SupportAdminView
+class AddBusView
+}
+
+@enduml
